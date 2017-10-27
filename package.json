@@ -1,0 +1,29 @@
+{
+  "name": "hashacks",
+  "version": "1.0.0",
+  "description": "��#\u0000h\u0000a\u0000s\u0000h\u0000a\u0000c\u0000k\u0000s\u0000 \u0000h\u0000a\u0000c\u0000k\u0000a\u0000t\u0000h\u0000o\u0000n\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aryannarora/Hashhacks.git"
+  },
+  "author": "underdogs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aryannarora/Hashhacks/issues"
+  },
+  "homepage": "https://github.com/aryannarora/Hashhacks#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bower": "^1.8.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mongodb": "^2.2.33",
+    "passport": "^0.4.0"
+  }
+}
