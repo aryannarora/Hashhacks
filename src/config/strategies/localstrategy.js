@@ -8,7 +8,7 @@ module.exports = function () {
             passwordField: 'password'
         },
         function (username, password, done) {
-            var url ='mongodb://localhost:27017/infohub_mentors';
+            var url ='mongodb://localhost:27017/hhusers';
 
             mongodb.connect(url, function (err, db) {
                 console.log(username);

@@ -45,8 +45,53 @@ authRouter.route('/signin')
 	    failureRedirect: '/login'
 	}), function (req, res) {
 		var id=req.params.id;
-	    res.redirect('/user/dashboard/:id');
+	    res.redirect('/user/dashboard');
 	});
+
+
+ authRouter.route('/register')
+        .post(function (req, res) {
+            var url =
+                'mongodb://localhost:27017/hhusers';
+            mongodb.connect(url, function (err, db) {
+                var collection = db.collection('users');
+                var user = {
+                    _id: req.body.email,
+                    password: req.body.password,
+                    name: req.body.name,
+                    phone: req.body.phone,
+                    address:req.body.add,
+                    city:req.body.city,
+                    zip:req.body.zip,
+                    state:req.body.state
+                };
+                collection.findOne({
+                	_id: user._id
+                },function(err , results){
+                	if(results===null)
+                	{	
+                		 collection.insert(user,
+                    function (err, results) {
+
+                        req.login(results.ops[0], function () {
+                            res.redirect('/user/dashboard');
+
+                        });
+                    });
+                	}
+                	else
+                	 {	
+                	res.redirect('/signup');       
+
+
+
+                	
+                	}
+                })
+               
+            });
+           });
+
 
 userrouter.use(function(req,res,next){
 	if(!req.user){
