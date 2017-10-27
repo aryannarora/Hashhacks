@@ -18,3 +18,9 @@ app.use(session({secret: 'hashhacks',
 					
 					}));
 require('./src/config/passport')(app);
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.set('views', './src/views');
+
+var userrouter= express.Router();
