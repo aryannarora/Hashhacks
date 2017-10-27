@@ -17,15 +17,28 @@ app.use(session({secret: 'hashhacks',
 					saveUninitialized:false
 					
 					}));
-require('./src/config/passport')(app);
+
 app.use(express.static('public'));
+//require('./src/config/passport')(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('views', './src/views');
+app.set('view engine', 'ejs');
 
 var userrouter= express.Router();
 var authRouter= express.Router();
 
+app.get('/signup',function(req,res){
+	res.render('sign-up');
+})
+
+app.get('/login',function(req,res){
+	res.render('login');
+})
+
+app.get('/',function(req,res){
+	res.render('frontpage');
+})
 
 authRouter.route('/signin')
 	.post(passport.authenticate('local', {
