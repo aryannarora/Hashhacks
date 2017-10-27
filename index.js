@@ -24,3 +24,21 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.set('views', './src/views');
 
 var userrouter= express.Router();
+var authRouter= express.Router();
+
+
+authRouter.route('/signin')
+	.post(passport.authenticate('local', {
+	    failureRedirect: '/login'
+	}), function (req, res) {
+		var id=req.params.id;
+	    res.redirect('/user/dashboard/:id');
+	});
+
+userrouter.use(function(req,res,next){
+	if(!req.user){
+		return res.redirect('/login');		
+	}
+	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  	next();
+});
