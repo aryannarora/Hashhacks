@@ -1,0 +1,8 @@
+3.00pm, till now we have built:
+1. Login/Signup page
+2. Block structure decided(backend)
+
+In next 8hours, we aim at:
+1. Google maps to locate user 
+2. Encryption and mapping of hashids
+3. Wallet structure
