@@ -14,13 +14,14 @@ class Block:
         self.index = index
         self.timestamp = timestamp
         self.previousHash = previousHash
-        self.balance = 100
+        self.balance = float(100)
         self.email = email
-        self.lat = lat
-        self.long = long
-        self.energy = energy
-        self.unit = unit
+        self.lat = float(lat)
+        self.long = float(long)
+        self.energy = float(energy)
+        self.unit = float(unit)
         self.hash = self.calculateHash()
+        # self.current_transactions = []
 
 
     def calculateHash(self):
@@ -55,6 +56,56 @@ class Blockchain:
     def Chain(self):
         return self.chain
 
+    def transaction(self,sender_id,reciever_id,amount,energy):
+        if sender_id == reciever_id:
+            print("Same hashes")
+            return 0
+        sender = None
+        reciever = None
+        for i in self.chain:
+            print(i.email)
+            if i.hash == sender_id and sender == None:
+                print("Sender found")
+                sender = i
+                i.balance += float(amount)
+                i.energy -= float(energy)
+            if i.hash == reciever_id and reciever == None:
+                print("Reciever Found")
+                reciever = i
+                i.balance -= float(amount)
+                i.energy += float(energy)
+            if sender != None and reciever != None:
+                print("{} recieved {} energy from {} amounting {}".format(reciever.email,sender.email,energy,amount))
+                data = {'sender':sender_id,'reciever':reciever_id,'amount':amount,'energy':energy}
+                self.transactions.append(data)
+
+                return 1
+        print("Transaction not possible",sender.email,reciever.email)
+        return 0
+
+    def search(self,id):
+        for i in self.chain:
+            if i.hash == id:
+                return {'email':i.email,'amount':i.balance,
+                        'energy':i.energy}
+        return "NOT FOUND"
+
+    def length(self):
+        return len(self.chain)
+
+    def avg_price(self):
+        ans = 1.0
+        tot = 0.0
+        for i in self.chain:
+            tot+= i.unit
+        ans = ans*tot/self.length()
+        return ans
+
+    def last_block(self):
+        return self.chain[-1].email
+
+
+
 
 
 # import datetime
@@ -87,12 +138,51 @@ def add_block():
         'previousHash':block.previousHash
     }
     return jsonify(response), 200
+
 @app.route('/chain',methods=['GET'])
 def chainBlock():
     chain = [{'previousHash':x.previousHash,'hash':x.hash,'email':x.email,'lat':x.lat,'long':x.long,'energy':x.energy,'unit':x.unit,'balance':x.balance} for x in blockchain.Chain()]
-
     response = {
-        'chain':chain
+        'chain':chain,
+    }
+    return jsonify(response), 200
+
+
+@app.route('/transaction/',methods=['GET'])
+def transac():
+    sender_hash = request.args.get('sen')
+    reciever_hash = request.args.get('rec')
+    energy = request.args.get('energy')
+    amount = request.args.get('cost')
+
+    flag = blockchain.transaction(sender_id = sender_hash,
+                            reciever_id=reciever_hash,
+                            energy= energy,
+                            amount = amount)
+    if flag == 0:
+        response = {
+            'message': "Error, something wrong"
+        }
+    else:
+        response = {
+            'transaction':blockchain.transactions[-1],
+            'sender_details': blockchain.search(sender_hash),
+            'reciever_details': blockchain.search(reciever_hash)
+        }
+
+    return jsonify(response), 200
+
+@app.route('/chainLength/',methods=['GET'])
+def chainlength():
+    response = {
+        'length':blockchain.length()
+    }
+    return jsonify(response), 200
+
+@app.route('/avg/',methods=['GET'])
+def avgprice():
+    response = {
+        'avg_price': blockchain.avg_price()
     }
     return jsonify(response), 200
 

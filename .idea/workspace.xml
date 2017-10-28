@@ -20,8 +20,8 @@
           <file leaf-file-name="blockchain.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/blockchain-api/blockchain.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="246">
-                  <caret line="91" column="44" lean-forward="false" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
+                <state relative-caret-position="-3496">
+                  <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#24#0" expanded="true" />
                   </folding>
@@ -33,7 +33,7 @@
             <entry file="file://$PROJECT_DIR$/blockchain-api/api-2.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="2273">
-                  <caret line="229" column="0" lean-forward="true" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+                  <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
                   <folding>
                     <element signature="e#0#14#0" expanded="true" />
                   </folding>
@@ -60,11 +60,9 @@
           <file leaf-file-name="api-2.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/blockchain-api/api-2.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-3739">
-                  <caret line="5" column="22" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="22" />
-                  <folding>
-                    <element signature="e#1562#2636#0" expanded="false" />
-                  </folding>
+                <state relative-caret-position="-2156">
+                  <caret line="5" column="22" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="22" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -90,6 +88,9 @@
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
     <option name="width" value="1680" />
@@ -215,8 +216,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -261,7 +263,7 @@
     <entry file="file://$PROJECT_DIR$/blockchain-api/api-2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2273">
-          <caret line="229" column="0" lean-forward="true" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
+          <caret line="229" column="0" lean-forward="false" selection-start-line="229" selection-start-column="0" selection-end-line="229" selection-end-column="0" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -270,8 +272,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blockchain-api/blockchain.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="91" column="44" lean-forward="false" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
+        <state relative-caret-position="-3496">
+          <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
