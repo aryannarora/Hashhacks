@@ -2,6 +2,7 @@ var express=require('express');
 var app=express();
 var port=5000;
 var mongodb = require('mongodb').MongoClient;
+request = require('request');
 
 app.listen(port,function(err){
 	console.log('system running on Port: ',port );
@@ -49,13 +50,14 @@ authRouter.route('/signin')
 	.post(passport.authenticate('local', {
 	    failureRedirect: '/login'
 	}), function (req, res) {
-		var id=req.params.id;
+		
 	    res.redirect('/user/dashboard');
 	});
 
 
  authRouter.route('/register')
         .post(function (req, res) {
+        	
             var url =
                 'mongodb://localhost:27017/hhusers';
             mongodb.connect(url, function (err, db) {
@@ -68,18 +70,31 @@ authRouter.route('/signin')
                     address:req.body.add,
                     city:req.body.city,
                     zip:req.body.zip,
-                    state:req.body.state
+                    state:req.body.state,
+                    hash:" "
                 };
                 collection.findOne({
                 	_id: user._id
                 },function(err , results){
                 	if(results===null)
                 	{	
+
                 		 collection.insert(user,
                     function (err, results) {
+                    	request
+					  .get('http://localhost:8000/add/?timestamp=0210247&email='+user._id+'&lat=150.3&long=12.33&energy='+(Math.random()*99+1)+'&unit='+(Math.random()*15+5))
+					  .on('response', function(response) {
+					    // console.log(response.statusCode) // 200
+					    // console.log(response.headers['content-type']) // 'image/png'
+					    db.users.update({_id:user._id},
+					    	$set={
+					    		hash:response.hash
+
+					    })
+					  });
 
                         req.login(results.ops[0], function () {
-                            res.redirect('/user/dashboard');
+                        	res.redirect('/user/dashboard');
 
                         });
                     });
@@ -116,24 +131,16 @@ userrouter.use(function(req,res,next){
 
 userrouter.route('/dashboard')
     .get(function (req, res) {
-    	 res.render('frontpage',{
+
+    	 res.render('bs',{
+    	 	id:req.user._id
         	
         });
     });
 
 
 
-const request = require('request');
+
+
+
  
-request
-  .get('http://localhost:8000/chain')
-  .on('response', function(response) {
-    console.log(response.statusCode) // 200
-    console.log(response.body) // 'image/png'
-  });
-  
-request
-  .get('http://localhost:8000/chain')
-  .on('error', function(err) {
-    console.log(err)
-  });
