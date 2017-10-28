@@ -61,20 +61,17 @@ body {font-size:16px;}
       <h1 class="w3-xxxlarge w3-text-yellow"><b>Sell.</b></h1>
       <hr style="width:50px;border:5px solid black;opacity:0.5;" class="w3-round">
       <p>Do you want to sell? Please Fill out the form.</p>
-      <form action="/action_page.php" target="_blank">
+      <form  target="_blank">
         <div class="w3-section">
-          <label>Name</label>
-          <input class="w3-input w3-border" type="text" name="Name" required>
+          <label>Number of units you want to sell.</label>
+          <input class="w3-input w3-border" type="text" name="units" required>
         </div>
         <div class="w3-section">
-          <label>Email</label>
-          <input class="w3-input w3-border" type="text" name="Email" required>
+          <label>Price per unit</label>
+          <input class="w3-input w3-border" type="text" name="price" required>
         </div>
-        <div class="w3-section">
-          <label>Message</label>
-          <input class="w3-input w3-border" type="text" name="Message" required>
-        </div>
-        <button type="submit" class="w3-button w3-block w3-padding-large w3-yellow w3-margin-bottom">Sell</button>
+       
+        <button id="getchain" class="w3-button w3-block w3-padding-large w3-yellow w3-margin-bottom">Sell</button>
       </form>  
     </div>
   
@@ -103,9 +100,19 @@ body {font-size:16px;}
   <br/>
   <div class="w3-center">
 <div id="Trending">
-  <img src="/image3.png" alt="graph" height="300" width="400"/>
+ <div class="row">
+    <div class="col-md-6"></div>
+ </div>
 </div>
 <!-- End page content -->
 </div>
+
+ <script type="text/javascript">
+      $("#getchain").on("click", function(){
+    $.get("http://localhost:8000/chain", function(data, status){
+       console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+    });
+});
+    </script>
 </body>
 </html>

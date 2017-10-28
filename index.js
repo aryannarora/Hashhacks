@@ -54,11 +54,11 @@ authRouter.route('/signin')
 	    res.redirect('/user/dashboard');
 	});
 
-
+//
+var unirest=require('unirest');
  authRouter.route('/register')
         .post(function (req, res) {
-        	
-            var url =
+                var url =
                 'mongodb://localhost:27017/hhusers';
             mongodb.connect(url, function (err, db) {
                 var collection = db.collection('users');
@@ -66,51 +66,68 @@ authRouter.route('/signin')
                     _id: req.body.email,
                     password: req.body.password,
                     name: req.body.name,
-                    phone: req.body.phone,
                     address:req.body.add,
                     city:req.body.city,
-                    zip:req.body.zip,
                     state:req.body.state,
-                    hash:" "
+                    zip:req.body.zip,
+                    hash:' '
                 };
                 collection.findOne({
                 	_id: user._id
                 },function(err , results){
                 	if(results===null)
                 	{	
-
-                		 collection.insert(user,
-                    function (err, results) {
-                    	request
-					  .get('http://localhost:8000/add/?timestamp=0210247&email='+user._id+'&lat=150.3&long=12.33&energy='+(Math.random()*99+1)+'&unit='+(Math.random()*15+5))
-					  .on('response', function(response) {
-					    // console.log(response.statusCode) // 200
-					    // console.log(response.headers['content-type']) // 'image/png'
-					    db.users.update({_id:user._id},
-					    	$set={
-					    		hash:response.hash
-
-					    })
-					  });
-
+              			console.log('im in');
+                		
+unirest.get("http://localhost:8000/add/?timestamp=0217240&email=aryan@gmail.com&lat=0.94&long=20.2&energy=50&unit=5")
+  .send()
+  .end(response=> {
+    if (response.ok) {
+    	user.hash=response.body.hash;
+    	collection.insert(user,function (err, results) {
+                 
+                    	
                         req.login(results.ops[0], function () {
-                        	res.redirect('/user/dashboard');
+                            res.redirect('/user/dashboard');
 
                         });
                     });
+    	console.log(user);
+      console.log("Got a response: ", response.body.hash)
+    } 
+
+    else {
+      console.log("Got an error: ", response.error)
+    }
+  });
+	 
                 	}
                 	else
-                	 {	
-                	res.redirect('/signup');       
-
-
-
+                	{	
+                		res.redirect('/login');             	
                 	
                 	}
                 })
                
             });
            });
+//
+ 
+unirest.get("http://localhost:8000/chainLength")
+  .send()
+  .end(response=> {
+    if (response.ok) {
+    	total=response.body.length;
+
+    } 
+
+    else {
+      console.log("Got an error: ", response.error)
+    }
+  });
+
+
+
 
 
 authRouter.use(function(req,res,next){
@@ -130,6 +147,16 @@ userrouter.use(function(req,res,next){
 });
 
 userrouter.route('/dashboard')
+    .get(function (req, res) {
+
+    	 res.render('bs',{
+    	 	id:req.user._id
+        	
+        });
+    });
+
+
+    userrouter.route('/sell')
     .get(function (req, res) {
 
     	 res.render('bs',{

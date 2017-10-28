@@ -29,6 +29,7 @@
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "request": "^2.83.0",
+    "unirest": "^0.5.1",
     "w3-css": "^4.0.4"
   }
 }

@@ -27,7 +27,7 @@ h2{
 </style>
 <body>
 	<div class="w3-top w3-hide-small">
-    
+
 
   <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
     <a href="#" class="w3-bar-item w3-button">HOME</a>
@@ -39,7 +39,7 @@ h2{
 <header class="bgimg w3-display-container w3-grayscale-min" id="home">
   
   <div class="w3-display-middle w3-center">
-    <span class="w3-text-white w3-hide-small" style="font-size:100px"><b>Electra</b><br></span>
+    <span class="w3-text-white w3-hide-small" style="font-size:100px"><b>BlockUrja</b><br></span>
     <h2> a blockchain platform for electricity trading</h2>
     <div class="row">
     <p><button class="w3-button w3-xxlarge w3-yellow" id="getchain">Sign up</button>&nbsp; &nbsp; &nbsp; &nbsp;
@@ -68,13 +68,7 @@ h2{
         
       </div>
     </div>
-    <script type="text/javascript">
-      $("#getchain").on("click", function(){
-    $.get("http://localhost:8000/chain", function(data, status){
-       console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-    });
-});
-    </script>
+   
      <script type="text/javascript">
       $("#getchain").on("click", function(){
     $.get("http://localhost:8000/chain", function(data, status){
@@ -82,5 +76,14 @@ h2{
     });
 });
     </script>
+//ajax call for sell buy
+<script type="text/javascript">
+      $("#sb").on("click", function(){
+    $.get("http://localhost:8000/add/?timestamp"+ts+"&email="+<%=id%>+"&lat=150.3&long=12.33&energy="+energy+"&unit=5", function(data, status){
+       console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+    });
+});
+    </script>
+
 </body>
 </html>
