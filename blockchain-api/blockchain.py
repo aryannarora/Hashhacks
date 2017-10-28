@@ -91,6 +91,15 @@ class Blockchain:
     def length(self):
         return len(self.chain)
 
+    def avg_price(self):
+        ans = 1.0
+        tot = 0.0
+        for i in self.chain:
+            tot+= i.unit
+        ans = ans*tot/self.length()
+        return ans
+
+
 
 
 
@@ -162,6 +171,13 @@ def transac():
 def chainlength():
     response = {
         'length':blockchain.length()
+    }
+    return jsonify(response), 200
+
+@app.route('/avg/',methods=['GET'])
+def avgprice():
+    response = {
+        'avg_price': blockchain.avg_price()
     }
     return jsonify(response), 200
 
