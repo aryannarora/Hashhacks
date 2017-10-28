@@ -3,7 +3,7 @@
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="././lib/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="././lib/w3.css">
 <script type="text/javascript" src="././lib/jquery/dist/jquery.min.js"></script>
    <script type="text/javascript" src="././lib/bootstrap/dist/js/bootstrap.min.js"></script>
    
@@ -41,7 +41,7 @@ h2{
     <span class="w3-text-white w3-hide-small" style="font-size:100px"><b>Electra</b><br></span>
     <h2> a blockchain platform for electricity trading</h2>
     <div class="row">
-    <p><a href="sign-up.html" class="w3-button w3-xxlarge w3-yellow">Sign up</a>&nbsp; &nbsp; &nbsp; &nbsp;
+    <p><button class="w3-button w3-xxlarge w3-yellow" id="getchain">Sign up</button>&nbsp; &nbsp; &nbsp; &nbsp;
     <a href="login.html" class="w3-button w3-xxlarge w3-yellow">Login</a></p>
   </div>
   </div>
@@ -66,5 +66,12 @@ h2{
         
       </div>
     </div>
+    <script type="text/javascript">
+      $("#getchain").on("click", function(){
+    $.get("http://localhost:8000/chain", function(data, status){
+       console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+    });
+});
+    </script>
 </body>
 </html>

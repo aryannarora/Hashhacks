@@ -120,3 +120,20 @@ userrouter.route('/dashboard')
         	
         });
     });
+
+
+
+const request = require('request');
+ 
+request
+  .get('http://localhost:8000/chain')
+  .on('response', function(response) {
+    console.log(response.statusCode) // 200
+    console.log(response.body) // 'image/png'
+  });
+  
+request
+  .get('http://localhost:8000/chain')
+  .on('error', function(err) {
+    console.log(err)
+  });
