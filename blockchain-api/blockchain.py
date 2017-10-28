@@ -51,7 +51,10 @@ class Blockchain:
         block = Block(index=len(self.chain)+1,timestamp=timestamp,previousHash=self.chain[-1].hash,email=email,lat=lat,long=long,energy=energy,unit=unit)
         self.chain.append(block)
         self.nodes.add(block)
-        return block
+        if self.checkValidity(block):
+            return block
+        else:
+            return 0
 
     def Chain(self):
         return self.chain
@@ -104,7 +107,14 @@ class Blockchain:
     def last_block(self):
         return self.chain[-1].email
 
+    def checkValidity(self,node):
+        chai = self.chain
+        for i in range(1,len(chai)):
+            if chai[i] == node:
+                if chai[i].previousHash == chai[i-1].hash:
+                    return True
 
+        return False
 
 
 
@@ -132,6 +142,13 @@ def add_block():
     unit = request.args.get('unit')
     block = blockchain.create_new_node(email=email,timestamp=timestamp,
                                lat=lat,long=long,energy=energy,unit=unit)
+    if block == 0:
+        response = {
+            'message':"Node cannot be added",
+        }
+        return jsonify(response), 200
+
+    print("Node {} successfully added".format(block.index))
     response = {
         'message': 'Node successfully added',
         'index': block.index,
@@ -190,11 +207,11 @@ if __name__ == '__main__':
     from argparse import ArgumentParser
 
     parser = ArgumentParser()
-    parser.add_argument('-p', '--port', default=8000, type=int, help='port to listen on')
+    parser.add_argument('-p', '--port', default=5000, type=int, help='port to listen on')
     args = parser.parse_args()
     port = args.port
 
-    app.run(host='localhost', port=port)
+    app.run(host='0.0.0.0', port=port)
 
 
 
