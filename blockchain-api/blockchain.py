@@ -88,6 +88,9 @@ class Blockchain:
                         'energy':i.energy}
         return "NOT FOUND"
 
+    def length(self):
+        return len(self.chain)
+
 
 
 
@@ -155,6 +158,12 @@ def transac():
 
     return jsonify(response), 200
 
+@app.route('/chainLength/',methods=['GET'])
+def chainlength():
+    response = {
+        'length':blockchain.length()
+    }
+    return jsonify(response), 200
 
 if __name__ == '__main__':
     from argparse import ArgumentParser
