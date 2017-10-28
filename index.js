@@ -1,6 +1,7 @@
 var express=require('express');
 var app=express();
 var port=5000;
+var mongodb = require('mongodb').MongoClient;
 
 app.listen(port,function(err){
 	console.log('system running on Port: ',port );
@@ -19,7 +20,7 @@ app.use(session({secret: 'hashhacks',
 					}));
 
 app.use(express.static('public'));
-//require('./src/config/passport')(app);
+require('./src/config/passport')(app);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('views', './src/views');
@@ -38,7 +39,11 @@ app.get('/login',function(req,res){
 
 app.get('/',function(req,res){
 	res.render('frontpage');
-})
+});
+
+app.use('/auth', authRouter);
+
+app.use('/user', userrouter);
 
 authRouter.route('/signin')
 	.post(passport.authenticate('local', {
@@ -93,6 +98,14 @@ authRouter.route('/signin')
            });
 
 
+authRouter.use(function(req,res,next){
+	if(!req.user){
+		return res.redirect('/login');		
+	}
+	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
+  	next();
+});
+
 userrouter.use(function(req,res,next){
 	if(!req.user){
 		return res.redirect('/login');		
@@ -100,3 +113,10 @@ userrouter.use(function(req,res,next){
 	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   	next();
 });
+
+userrouter.route('/dashboard')
+    .get(function (req, res) {
+    	 res.render('frontpage',{
+        	
+        });
+    });
