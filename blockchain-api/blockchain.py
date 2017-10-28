@@ -21,7 +21,7 @@ class Block:
         self.energy = float(energy)
         self.unit = float(unit)
         self.hash = self.calculateHash()
-        self.current_transactions = []
+        # self.current_transactions = []
 
 
     def calculateHash(self):
@@ -76,7 +76,9 @@ class Blockchain:
                 i.energy += float(energy)
             if sender != None and reciever != None:
                 print("{} recieved {} energy from {} amounting {}".format(reciever.email,sender.email,energy,amount))
-                self.transactions.append({'sender':sender_id,'reciever':reciever_id,'amount':amount,'energy':energy})
+                data = {'sender':sender_id,'reciever':reciever_id,'amount':amount,'energy':energy}
+                self.transactions.append(data)
+
                 return 1
         print("Transaction not possible",sender.email,reciever.email)
         return 0
@@ -98,6 +100,9 @@ class Blockchain:
             tot+= i.unit
         ans = ans*tot/self.length()
         return ans
+
+    def last_block(self):
+        return self.chain[-1].email
 
 
 
