@@ -116,18 +116,7 @@ unirest.get("http://localhost:8000/add/?timestamp=0217240&email=aryan@gmail.com&
            });
 //
  
-unirest.get("http://localhost:8000/chainLength")
-  .send()
-  .end(response=> {
-    if (response.ok) {
-    	total=response.body.length;
 
-    } 
-
-    else {
-      console.log("Got an error: ", response.error)
-    }
-  });
 
 
 
