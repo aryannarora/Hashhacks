@@ -31,7 +31,7 @@ h2{
 
   <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
     <a href="#" class="w3-bar-item w3-button">HOME</a>
-    <a href="#menu" class="w3-bar-item w3-button">MENU</a>
+ 
     <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
   </div>
 </div>
@@ -42,12 +42,11 @@ h2{
     <span class="w3-text-white w3-hide-small" style="font-size:100px"><b>BlockUrja</b><br></span>
     <h2> a blockchain platform for electricity trading</h2>
     <div class="row">
-    <p><button class="w3-button w3-xxlarge w3-yellow" id="getchain">Sign up</button>&nbsp; &nbsp; &nbsp; &nbsp;
-    <a href="login.html" class="w3-button w3-xxlarge w3-yellow">Login</a></p>
+    <p><a href="/signup" class="w3-button w3-xxlarge w3-yellow" id="getchain">Sign up</a>&nbsp; &nbsp; &nbsp; &nbsp;
+    <a href="/login" class="w3-button w3-xxlarge w3-yellow">Login</a></p>
   </div>
   </div>
 </header>
-<button class="w3-button w3-xxlarge w3-yellow" id="getchain">add block</button>
 
 <div class="w3-container w3-padding-64 w3-yellow w3-grayscale-min w3-xlarge" id="about">
   <div class="w3-content">
@@ -68,22 +67,7 @@ h2{
         
       </div>
     </div>
-   
-     <script type="text/javascript">
-      $("#getchain").on("click", function(){
-    $.get("http://localhost:8000/chain", function(data, status){
-       console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-    });
-});
-    </script>
-//ajax call for sell buy
-<script type="text/javascript">
-      $("#sb").on("click", function(){
-    $.get("http://localhost:8000/add/?timestamp"+ts+"&email="+<%=id%>+"&lat=150.3&long=12.33&energy="+energy+"&unit=5", function(data, status){
-       console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-    });
-});
-    </script>
+  
 
 </body>
 </html>

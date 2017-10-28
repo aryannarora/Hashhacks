@@ -31,10 +31,13 @@ var userrouter= express.Router();
 var authRouter= express.Router();
 
 app.get('/signup',function(req,res){
+	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 	res.render('sign-up');
 })
 
 app.get('/login',function(req,res){
+
+	res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 	res.render('login');
 })
 
@@ -50,7 +53,7 @@ authRouter.route('/signin')
 	.post(passport.authenticate('local', {
 	    failureRedirect: '/login'
 	}), function (req, res) {
-		
+		res.set('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 	    res.redirect('/user/dashboard');
 	});
 
@@ -150,7 +153,8 @@ userrouter.route('/dashboard')
     .get(function (req, res) {
 
     	 res.render('bs',{
-    	 	id:req.user._id
+    	 	id:req.user._id,
+    	 	hash:req.user.hash
         	
         });
     });
@@ -164,6 +168,12 @@ userrouter.route('/dashboard')
         	
         });
     });
+
+
+  app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/login');
+});
 
 
 

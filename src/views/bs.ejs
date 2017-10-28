@@ -27,8 +27,8 @@ body {font-size:16px;}
     <a href="#Home" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-grey">Home</a> 
     <a href="#Purchase" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-grey">Purchase</a> 
     <a href="#Sell" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-grey">Sell</a> 
-    <a href="#Trending" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-grey">Trending</a> 
-    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-grey">Logout</a>
+   <!--  <a href="#Trending" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-grey">Trending</a>  -->
+    <a href="/logout" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-grey">Logout</a>
   </div>
 </nav>
 
@@ -49,29 +49,40 @@ body {font-size:16px;}
         <div class="w3-light-grey">
           <img src="/209265408.png" alt="John" height="200" width="200">
           <div class="w3-container">
-            <h1 class="w3-right-align">John Doe</h1>
-            <p class="w3-opacity">CEO & Founder</p>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+            <h1 class="w3-right-align"><%=id%></h1>
+            
           </div>
         </div>
       </div>
     </div>
+
+     <div class="w3-center">
+<div id="Trending">
+ <div class="row">
+    <div class="col-md-6"><h3>Total number of users: <span id="total"></span></h3></div>
+    <div class="col-md-6"><h3>Average cost of each unit: <span id="avg"></span></h3></div>
+ </div>
+</div>
+<!-- End page content -->
+</div>
   
   <div class="w3-container" id="Sell" style="margin-top:75px">
       <h1 class="w3-xxxlarge w3-text-yellow"><b>Sell.</b></h1>
       <hr style="width:50px;border:5px solid black;opacity:0.5;" class="w3-round">
       <p>Do you want to sell? Please Fill out the form.</p>
-      <form  target="_blank">
+      <form>
         <div class="w3-section">
+
           <label>Number of units you want to sell.</label>
-          <input class="w3-input w3-border" type="text" name="units" required>
+          <input class="w3-input w3-border" type="text" id="sellunits" required>
         </div>
         <div class="w3-section">
           <label>Price per unit</label>
-          <input class="w3-input w3-border" type="text" name="price" required>
+          <input class="w3-input w3-border" type="text" id="sellprice" required>
         </div>
        
-        <button id="getchain" class="w3-button w3-block w3-padding-large w3-yellow w3-margin-bottom">Sell</button>
+        <a id="getchain" class="w3-button w3-block w3-padding-large w3-yellow w3-margin-bottom">Sell</a>
+
       </form>  
     </div>
   
@@ -79,40 +90,48 @@ body {font-size:16px;}
     <h1 class="w3-xxxlarge w3-text-yellow"><b>Purchase.</b></h1>
     <hr style="width:50px;border:5px solid black;" class="w3-round">
     <p>Do you want to purchase? Please Fill out the form.</p>
-    <form action="/action_page.php" target="_blank">
+    <form action="" target="_blank">
       <div class="w3-section">
-        <label>Name</label>
-        <input class="w3-input w3-border" type="text" name="Name" required>
+        <label>How much unit of energy you are willing to buy?</label>
+        <input class="w3-input w3-border" type="text" name="buy-units" required>
       </div>
-      <div class="w3-section">
-        <label>Email</label>
-        <input class="w3-input w3-border" type="text" name="Email" required>
-      </div>
-      <div class="w3-section">
-        <label>Message</label>
-        <input class="w3-input w3-border" type="text" name="Message" required>
-      </div>
-      <button type="submit" class="w3-button w3-block w3-padding-large w3-yellow w3-margin-bottom">Purchase</button>
+   
+      <button id="purchase" class="w3-button w3-block w3-padding-large w3-yellow w3-margin-bottom">Purchase</button>
     </form>  
   </div>
   <br/>
   <br/>
   <br/>
-  <div class="w3-center">
-<div id="Trending">
- <div class="row">
-    <div class="col-md-6"></div>
- </div>
-</div>
-<!-- End page content -->
-</div>
+ 
 
  <script type="text/javascript">
+  var sellunits=$('#sellunits').val();
+  var sellprice=$('#sellprice').val();
+
+
       $("#getchain").on("click", function(){
-    $.get("http://localhost:8000/chain", function(data, status){
-       console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+    $.get("http://localhost:8000/modify/user="+toString(<%=hash%>)+"&units="+sellprice+"&energy="+sellunits+"", function(data, status){
+       console.log("Data: " + JSON.stringify(data) + "Status: " + status);
+       console.log("Done! We'll notify you after "+sellunits + "units" + "have been sold at" + sellprice+ "price per unit ");
     });
 });
     </script>
+    <script type="text/javascript">
+      $("#purchase").on("click", function(){
+    $.get("http://localhost:8000/chain", function(data, status){console.log("Data: " + JSON.stringify(data) + "Status: " + status)});
+    }); </script>
+
+    <script type="text/javascript">
+
+    $.get("http://localhost:8000/chainLength", function(data, status){ console.log("Data: " + JSON.stringify(data) + "Status: " + status);  
+      $("#total").text(data.length);
+        }) 
+      </script>
+
+        <script type="text/javascript">
+
+    $.get("http://localhost:8000/avg", function(data, status){ console.log("Data: " + JSON.stringify(data) + "Status: " + status);  
+      $("#avg").text(data.avg_price);
+        }); </script>
 </body>
 </html>
