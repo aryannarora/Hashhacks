@@ -6,3 +6,13 @@ In next 8hours, we aim at:
 1. Google maps to locate user 
 2. Encryption and mapping of hashids
 3. Wallet structure
+
+10am, at this point we have done with main objectives as follows:
+1. Successful login/signup
+2. Blockchain techonology built. Here, each node represents either a buyer or seller of electric power, and all of them are connected.
+3. Hardware part: Since now, electric transmission takes place through wires. But there is an alternative to this, that we can transfer      electricity wirelessly. Solutions:
+  (i)   Unmanned aerier vehicles
+  (ii)  Resonant power transfer sytem that can be carried and operated
+  (iii) Designing of power receiving board that uses sensors
+4. Marketting plan: 5-10% of each block traded will be profit. 
+  
